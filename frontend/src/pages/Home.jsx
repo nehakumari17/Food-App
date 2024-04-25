@@ -6,6 +6,7 @@ import { MdStars } from "react-icons/md";
 const Home = () => {
   const [cards, setCards] = useState([]);
   const [filteredCards, setFilteredCards] = useState([])
+  const [searchQuery, setSearchQuery] = useState('')
 
   const fetchData = async () => {
     try {
@@ -19,7 +20,6 @@ const Home = () => {
       const jsonData = await response.json();
       let infoArray =
         jsonData.data.cards[4].card.card.gridElements.infoWithStyle.restaurants;
-      console.log(infoArray);
       setCards(infoArray);
     } catch (error) {
       console.log(error);
@@ -32,8 +32,9 @@ const Home = () => {
 
   
   const handleSearch = () => {
-     
-    toast.success("Search done!!")}
+    const searchResults = cards.filter(restaurant => restaurant.info.name.toLowerCase().includes(searchQuery.toLowerCase()))
+    setFilteredCards(searchResults)
+  }
 
   const handleFilter = () => {
     const filteredRestaurants = cards.filter(restaurant => restaurant.info.avgRating >= 4.0)
@@ -53,6 +54,8 @@ const Home = () => {
             type="text"
             placeholder="Search..."
             className="border-2 rounded-full px-6 py-3 w-96"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
           <IoSearchOutline className="absolute right-4 top-1/2 transform -translate-y-1/2 text-black text-xl cursor-pointer" 
             onClick={handleSearch}

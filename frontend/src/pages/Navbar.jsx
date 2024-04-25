@@ -31,7 +31,8 @@ const Navbar = () => {
           <Link to="/contact">Contact</Link>
         </li>
       </ul>
-      <BsCart className="w-10 h-6 mr-20 cursor-pointer" />
+      <Link to="/cart"><BsCart className="w-10 h-6 mr-20 cursor-pointer" /></Link>
+      
     </div>
   )
 }
