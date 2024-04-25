@@ -6,7 +6,7 @@ import { SiSwiggy } from "react-icons/si";
 
 const Navbar = () => {
   return (
-    <div className="bg-gray-100 p-3 flex justify-between items-center h-20">
+    <div className="bg-blue-200 p-3 flex justify-between items-center h-20">
       <div className="flex items-center ml-20 cursor-pointer">
         <Link to="/">
         <SiSwiggy className="text-orange-600 w-28 h-16" />

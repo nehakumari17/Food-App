@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { IoSearchOutline } from 'react-icons/io5';
 import { MdStars } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+  const navigate = useNavigate()
   const [cards, setCards] = useState([]);
   const [filteredCards, setFilteredCards] = useState([])
   const [searchQuery, setSearchQuery] = useState('')
@@ -20,6 +22,7 @@ const Home = () => {
       const jsonData = await response.json();
       let infoArray =
         jsonData.data.cards[4].card.card.gridElements.infoWithStyle.restaurants;
+        console.log(infoArray)
       setCards(infoArray);
     } catch (error) {
       console.log(error);
@@ -44,9 +47,9 @@ const Home = () => {
   }
 
   return (
-    <div>
+    <div className="bg-blue-50">
       <Toaster position="top-right" />
-      <div className="flex justify-evenly my-5">
+      <div className="flex justify-evenly py-5 ">
         <button className="bg-gray-300 py-2 px-4 text-xl rounded-lg" onClick={handleFilter}>Filter</button>
 
         <div className="relative ml-4">
@@ -62,12 +65,12 @@ const Home = () => {
           />
         </div>
       </div>
-      <div className="w-[90%] min-h-screen ml-auto mr-auto rounded-lg mb-2">
+      <div className="w-[90%] min-h-screen ml-auto mr-auto rounded-lg pb-4">
       <div className="grid grid-cols-4 gap-3 p-2 ml-14">
         {(filteredCards.length > 0 ? filteredCards : cards).map((card, index) => (
           <div
-            key={index}
-            className="card w-64 bg-base-100 shadow-xl rounded-lg mt-2 p-2 cursor-pointer hover:scale-105 transition-transform duration-200 ease-in-out"
+            key={card.info.id}
+            className="w-64 bg-base-100 shadow-xl rounded-lg mt-2 p-2 cursor-pointer hover:scale-105 transition-transform duration-200 ease-in-out" onClick={() => navigate("/restaurant")}
           >
             <img
               src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${card.info.cloudinaryImageId}`}
