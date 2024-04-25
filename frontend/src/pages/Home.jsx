@@ -59,8 +59,8 @@ const Home = () => {
           />
         </div>
       </div>
-      <div className="w-[90%] min-h-screen border ml-auto mr-auto rounded-lg mb-2">
-      <div className="grid grid-cols-4 gap-3 p-2">
+      <div className="w-[90%] min-h-screen ml-auto mr-auto rounded-lg mb-2">
+      <div className="grid grid-cols-4 gap-3 p-2 ml-14">
         {(filteredCards.length > 0 ? filteredCards : cards).map((card, index) => (
           <div
             key={index}
