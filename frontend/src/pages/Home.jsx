@@ -15,14 +15,9 @@ const Home = () => {
       const response = await fetch(
         "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.61450&lng=77.30630&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
       );
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
-      }
       const jsonData = await response.json();
       let infoArray =
         jsonData.data.cards[4].card.card.gridElements.infoWithStyle.restaurants;
-        console.log(infoArray)
       setCards(infoArray);
     } catch (error) {
       console.log(error);
@@ -41,7 +36,6 @@ const Home = () => {
 
   const handleFilter = () => {
     const filteredRestaurants = cards.filter(restaurant => restaurant.info.avgRating >= 4.0)
-    console.log(filteredRestaurants)
     setFilteredCards(filteredRestaurants)
     toast.success("Showing restaurants with ratings above 4.0.")
   }
@@ -70,7 +64,7 @@ const Home = () => {
         {(filteredCards.length > 0 ? filteredCards : cards).map((card, index) => (
           <div
             key={card.info.id}
-            className="w-64 bg-base-100 shadow-xl rounded-lg mt-2 p-2 cursor-pointer hover:scale-105 transition-transform duration-200 ease-in-out" onClick={() => navigate("/restaurant")}
+            className="w-64 bg-base-100 shadow-xl rounded-lg mt-2 p-2 cursor-pointer hover:scale-105 transition-transform duration-200 ease-in-out" onClick={() => navigate("/restaurant/"+card.info.id)}
           >
             <img
               src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${card.info.cloudinaryImageId}`}
